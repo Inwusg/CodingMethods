@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ArithmeticCodingAlgorithm\ArithmeticCodingAlgorithm.csproj" />
     <ProjectReference Include="..\HuffmanCoding\HuffmanCoding.csproj" />
     <ProjectReference Include="..\ShannonFano\ShannonFano.csproj" />
   </ItemGroup>

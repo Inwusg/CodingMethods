@@ -14,7 +14,7 @@ namespace ShannonFano
             _code = new();
             _decode = new();
         }
-        public string Code(string input)
+        public string Encode(string input)
         {
             for (int i = 0; i < input.Length; i++)
             {
