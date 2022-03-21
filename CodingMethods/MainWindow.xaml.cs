@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HuffmanCoding;
 using Microsoft.Win32;
+using ShannonFano;
 
 //using Microsoft.Win32;
 
@@ -36,6 +37,7 @@ namespace CodingMethods
         }
 
         private BinaryTree _lab1;
+        private ShannonFanoAlg _lab2;
         private string _text, _text_preob;
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -86,12 +88,12 @@ namespace CodingMethods
                     Decode.IsEnabled = false;
                     FileButton.IsEnabled = false;
 
-                    Stopwatch sp = new();
-                    sp.Start();
+                    Stopwatch sp1 = new();
+                    sp1.Start();
                     _lab1 = new();
                     _text_preob = _lab1.Encode(_text);
-                    sp.Stop();
-                    tbCode.Text = sp.ElapsedMilliseconds.ToString();
+                    sp1.Stop();
+                    tbCode.Text = sp1.ElapsedMilliseconds.ToString();
                     CompressionRatio();
                     //RichTextBox1.Text = _text_preob;
                     RichTextBox2.Document.Blocks.Clear();
@@ -101,6 +103,23 @@ namespace CodingMethods
                     Decode.IsEnabled = true;
                     break;
                 case 1:
+                    Code.IsEnabled = false;
+                    Decode.IsEnabled = false;
+                    FileButton.IsEnabled = false;
+
+                    Stopwatch sp2 = new();
+                    sp2.Start();
+                    _lab2 = new();
+                    _text_preob = _lab2.Code(_text);
+                    sp2.Stop();
+                    tbCode.Text = sp2.ElapsedMilliseconds.ToString();
+                    CompressionRatio();
+                    //RichTextBox1.Text = _text_preob;
+                    RichTextBox2.Document.Blocks.Clear();
+                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(_text_preob)));
+
+                    FileButton.IsEnabled = true;
+                    Decode.IsEnabled = true;
                     break;
                 case 2:
                     break;
@@ -127,19 +146,34 @@ namespace CodingMethods
                     Decode.IsEnabled = false;
                     FileButton.IsEnabled = false;
 
-                    Stopwatch sp = new();
-                    sp.Start();
-                    var text = _lab1.Decode(_text_preob);
-                    sp.Stop();
-                    tbDecode.Text = sp.ElapsedMilliseconds.ToString();
+                    Stopwatch sp1 = new();
+                    sp1.Start();
+                    var text1 = _lab1.Decode(_text_preob);
+                    sp1.Stop();
+                    tbDecode.Text = sp1.ElapsedMilliseconds.ToString();
 
                     RichTextBox2.Document.Blocks.Clear();
-                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(text)));
+                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(text1)));
 
                     FileButton.IsEnabled = true;
                     Code.IsEnabled = true;
                     break;
                 case 1:
+                    Code.IsEnabled = false;
+                    Decode.IsEnabled = false;
+                    FileButton.IsEnabled = false;
+
+                    Stopwatch sp2 = new();
+                    sp2.Start();
+                    var text2 = _lab2.Decode(_text_preob);
+                    sp2.Stop();
+                    tbDecode.Text = sp2.ElapsedMilliseconds.ToString();
+
+                    RichTextBox2.Document.Blocks.Clear();
+                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(text2)));
+
+                    FileButton.IsEnabled = true;
+                    Code.IsEnabled = true;
                     break;
                 case 2:
                     break;
