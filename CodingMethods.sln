@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMethods", "CodingMethods\CodingMethods.csproj", "{96638C31-8716-4A6D-97DD-B6861D8654E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuffmanCoding", "HuffmanCoding\HuffmanCoding.csproj", "{12E5D5C9-4B64-4123-8440-C8FD4FCD7C81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{96638C31-8716-4A6D-97DD-B6861D8654E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96638C31-8716-4A6D-97DD-B6861D8654E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96638C31-8716-4A6D-97DD-B6861D8654E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E5D5C9-4B64-4123-8440-C8FD4FCD7C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E5D5C9-4B64-4123-8440-C8FD4FCD7C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E5D5C9-4B64-4123-8440-C8FD4FCD7C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E5D5C9-4B64-4123-8440-C8FD4FCD7C81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

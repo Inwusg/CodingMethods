@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="File" HorizontalAlignment="Left" Margin="77,43,0,0" VerticalAlignment="Top"/>
-        <Button Content="Code" HorizontalAlignment="Left" Margin="592,73,0,0" VerticalAlignment="Top"/>
-        <Button Content="Decode" HorizontalAlignment="Left" Margin="706,63,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="320,43,0,0" VerticalAlignment="Top" Width="120">
+        <Button x:Name="FileButton" Content="File" HorizontalAlignment="Left" Margin="77,43,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="Code" Content="Code" HorizontalAlignment="Left" Margin="592,73,0,0" VerticalAlignment="Top" Click="Code_Click"/>
+        <Button x:Name="Decode" Content="Decode" HorizontalAlignment="Left" Margin="706,63,0,0" VerticalAlignment="Top" Click="Decode_Click"/>
+        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="320,43,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
             <TextBlock>Lab1</TextBlock>
             <TextBlock>Lab2</TextBlock>
             <TextBlock>Lab3</TextBlock>
@@ -19,23 +19,29 @@
             <TextBlock>Lab6</TextBlock>
             <TextBlock>Lab7</TextBlock>
         </ComboBox>
-        <RichTextBox Margin="48,114,420,41">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <RichTextBox Margin="417,117,32,41">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
         <Label Content="Source" HorizontalAlignment="Left" Margin="50,91,0,0" VerticalAlignment="Top"/>
         <Label Content="Result" HorizontalAlignment="Left" Margin="402,78,0,0" VerticalAlignment="Top"/>
         <Label Content="Choose a method:" HorizontalAlignment="Left" Margin="189,45,0,0" VerticalAlignment="Top"/>
+        <RichTextBox x:Name="RichTextBox1" VerticalScrollBarVisibility="Visible" Margin="32,144,505,56">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox x:Name="RichTextBox2" VerticalScrollBarVisibility="Visible" Margin="400,144,72,56">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="TimeCode:" HorizontalAlignment="Left" Margin="7,383,0,0" VerticalAlignment="Top"/>
+        <Label Content="TimeDecode:" HorizontalAlignment="Left" Margin="216,388,0,0" VerticalAlignment="Top"/>
+        <Label Content="Сompression ratio:" HorizontalAlignment="Left" Margin="468,387,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbCode" HorizontalAlignment="Left" Margin="78,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbDecode" HorizontalAlignment="Left" Margin="320,396,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbCompress" HorizontalAlignment="Left" Margin="592,395,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
