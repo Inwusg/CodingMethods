@@ -7,6 +7,35 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button Content="File" HorizontalAlignment="Left" Margin="77,43,0,0" VerticalAlignment="Top"/>
+        <Button Content="Code" HorizontalAlignment="Left" Margin="592,73,0,0" VerticalAlignment="Top"/>
+        <Button Content="Decode" HorizontalAlignment="Left" Margin="706,63,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="320,43,0,0" VerticalAlignment="Top" Width="120">
+            <TextBlock>Lab1</TextBlock>
+            <TextBlock>Lab2</TextBlock>
+            <TextBlock>Lab3</TextBlock>
+            <TextBlock>Lab4</TextBlock>
+            <TextBlock>Lab5</TextBlock>
+            <TextBlock>Lab6</TextBlock>
+            <TextBlock>Lab7</TextBlock>
+        </ComboBox>
+        <RichTextBox Margin="48,114,420,41">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox Margin="417,117,32,41">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="50,91,0,0" VerticalAlignment="Top"/>
+        <Label Content="Result" HorizontalAlignment="Left" Margin="402,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="Choose a method:" HorizontalAlignment="Left" Margin="189,45,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
