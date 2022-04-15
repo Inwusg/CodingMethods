@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AlgorithmRLE;
 using HuffmanCoding;
 using Microsoft.Win32;
 using ShannonFano;
@@ -38,6 +41,7 @@ namespace CodingMethods
 
         private BinaryTree _lab1;
         private ShannonFanoAlg _lab2;
+        private RLE _lab4;
         private string _text, _text_preob;
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -79,51 +83,39 @@ namespace CodingMethods
             tbCompress.Text = ((double) (_text.Length * 8) / _text_preob.Length).ToString("F4");
         }
 
+        private void CompressionRatio2()
+        {
+            tbCompress.Text = ((double)(_text.Length * 8) / (_text_preob.Length * 8)).ToString("F4");
+        }
+
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Char[]; size: 56MB")]
         private void Code_Click(object sender, RoutedEventArgs e)
         {
+            Code.IsEnabled = false;
+            Decode.IsEnabled = false;
+            FileButton.IsEnabled = false;
+
+            Stopwatch sp = new();
+            sp.Start();
             switch (ComboBox.SelectedIndex)
             {
                 case 0:
-                    Code.IsEnabled = false;
-                    Decode.IsEnabled = false;
-                    FileButton.IsEnabled = false;
-
-                    Stopwatch sp1 = new();
-                    sp1.Start();
                     _lab1 = new();
                     _text_preob = _lab1.Encode(_text);
-                    sp1.Stop();
-                    tbCode.Text = sp1.ElapsedMilliseconds.ToString();
                     CompressionRatio();
-                    //RichTextBox1.Text = _text_preob;
-                    RichTextBox2.Document.Blocks.Clear();
-                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(_text_preob)));
-
-                    FileButton.IsEnabled = true;
-                    Decode.IsEnabled = true;
                     break;
                 case 1:
-                    Code.IsEnabled = false;
-                    Decode.IsEnabled = false;
-                    FileButton.IsEnabled = false;
-
-                    Stopwatch sp2 = new();
-                    sp2.Start();
                     _lab2 = new();
                     _text_preob = _lab2.Code(_text);
-                    sp2.Stop();
-                    tbCode.Text = sp2.ElapsedMilliseconds.ToString();
                     CompressionRatio();
-                    //RichTextBox1.Text = _text_preob;
-                    RichTextBox2.Document.Blocks.Clear();
-                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(_text_preob)));
-
-                    FileButton.IsEnabled = true;
-                    Decode.IsEnabled = true;
                     break;
                 case 2:
                     break;
                 case 3:
+                    _lab4 = new();
+                    //_text_preob = _lab4.BurrowsTransform(_text).ToString();
+                    _text_preob = _lab4.Encode(_text);
+                    CompressionRatio2();
                     break;
                 case 4:
                     break;
@@ -133,51 +125,51 @@ namespace CodingMethods
                     break;
                 default:
                     MessageBox.Show("Выберете метод кодирования");
-                    break;
+                    sp.Stop();
+                    FileButton.IsEnabled = true;
+                    Code.IsEnabled = true;
+                    Decode.IsEnabled = false;
+
+                    RichTextBox2.Document.Blocks.Clear();
+                    tbCode.Text = "";
+                    tbDecode.Text = "";
+                    tbCompress.Text = "";
+                    return;
             }
+
+            sp.Stop();
+            tbCode.Text = sp.ElapsedMilliseconds.ToString();
+            
+            RichTextBox2.Document.Blocks.Clear();
+            RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(_text_preob)));
+
+            FileButton.IsEnabled = true;
+            Decode.IsEnabled = true;
+
         }
 
+        [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.String; size: 437MB")]
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Char[]; size: 168MB")]
         private void Decode_Click(object sender, RoutedEventArgs e)
         {
+            Code.IsEnabled = false;
+            Decode.IsEnabled = false;
+            FileButton.IsEnabled = false;
+            string text = "";
+            Stopwatch sp = new();
+            sp.Start();
             switch (ComboBox.SelectedIndex)
             {
                 case 0:
-                    Code.IsEnabled = false; 
-                    Decode.IsEnabled = false;
-                    FileButton.IsEnabled = false;
-
-                    Stopwatch sp1 = new();
-                    sp1.Start();
-                    var text1 = _lab1.Decode(_text_preob);
-                    sp1.Stop();
-                    tbDecode.Text = sp1.ElapsedMilliseconds.ToString();
-
-                    RichTextBox2.Document.Blocks.Clear();
-                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(text1)));
-
-                    FileButton.IsEnabled = true;
-                    Code.IsEnabled = true;
+                    text = _lab1.Decode(_text_preob);
                     break;
                 case 1:
-                    Code.IsEnabled = false;
-                    Decode.IsEnabled = false;
-                    FileButton.IsEnabled = false;
-
-                    Stopwatch sp2 = new();
-                    sp2.Start();
-                    var text2 = _lab2.Decode(_text_preob);
-                    sp2.Stop();
-                    tbDecode.Text = sp2.ElapsedMilliseconds.ToString();
-
-                    RichTextBox2.Document.Blocks.Clear();
-                    RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(text2)));
-
-                    FileButton.IsEnabled = true;
-                    Code.IsEnabled = true;
+                    text = _lab2.Decode(_text_preob);
                     break;
                 case 2:
                     break;
                 case 3:
+                    text = _lab4.Decode(_text_preob);
                     break;
                 case 4:
                     break;
@@ -186,11 +178,28 @@ namespace CodingMethods
                 case 6:
                     break;
             }
+            sp.Stop();
+            tbDecode.Text = sp.ElapsedMilliseconds.ToString();
+
+            RichTextBox2.Document.Blocks.Clear();
+            RichTextBox2.Document.Blocks.Add(new Paragraph(new Run(text)));
+
+            FileButton.IsEnabled = true;
+            Code.IsEnabled = true;
         }
 
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Char[]; size: 84MB")]
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //clean reachbox2 because choose new method coding
+            FileButton.IsEnabled = true;
+            Code.IsEnabled = true;
+            Decode.IsEnabled = false;
+
+            RichTextBox2.Document.Blocks.Clear();
+            tbCode.Text = "";
+            tbDecode.Text = "";
+            tbCompress.Text = "";
         }
     }
 }
