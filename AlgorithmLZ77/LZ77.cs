@@ -2,17 +2,6 @@
 
 namespace AlgorithmLZ77
 {
-    //public class Node
-    //{
-    //    public int Offset { get; set; }
-    //    public int Length { get; set; }
-    //    public char Next { get; set; }
-
-    //    public Node(int offset, int length, char next)
-    //    {
-
-    //    }
-    //}
     public class LZ77
     {
         private StringBuilder _buffer;
