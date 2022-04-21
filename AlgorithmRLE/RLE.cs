@@ -37,8 +37,13 @@ namespace AlgorithmRLE
             return (outStr.ToString(), numOrigStr);
         }
 
+        public int sizeCompressText;
+
         public string Encode(string str)
         {
+            sizeCompressText = 0;
+            int max_k = -1;
+            int size = 0;
             str = BurrowsTransform(str).Item1;
 
             StringBuilder outStr = new StringBuilder("");
@@ -51,10 +56,21 @@ namespace AlgorithmRLE
                     outStr.Append(str[i - 1]);
                     outStr.Append("*");
                     outStr.Append(k);
+                    if (k > max_k) max_k = k;
+                    size++;
                     k = 1;
                 }
             }
 
+            int b1 = 2;
+            int k1 = 1;
+            while (max_k > b1)
+            {
+                b1 *= 2;
+                k1++;
+            }
+
+            sizeCompressText = (k1 + 8) * size;
             //return str;
             return outStr.ToString();
         }
