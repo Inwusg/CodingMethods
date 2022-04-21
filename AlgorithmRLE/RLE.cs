@@ -92,25 +92,43 @@ namespace AlgorithmRLE
             }
 
             string s = strDecode.ToString();
-            return ReversBurrowsTransform(s.Length,0, s);
+            return ReversBurrowsTransform(s);
 
         }
 
 
 
-        public string ReversBurrowsTransform(int n, int m, string s)
+        public string ReversBurrowsTransform(string str)
         {
-            m = -1;
-            for (int i = 0; i < s.Length; i++)
-            {
-                if (m < (int) s[i]) m = s[i];
-            }
+            //StringBuilder[] mas_sb = new StringBuilder[n];
+            //for (int i = 0; i < n; i++) mas_sb[i] = new StringBuilder("");
+            //for (int j = 0; j < n; j++)
+            //{
+            //    for (int i = 0; i < n; i++)
+            //    {
+            //        mas_sb[i].Insert(0, s[i]);
+            //    }
+            //    string[] mas2 = new string[n];
+            //    for (int i = 0; i < n; i++) mas2[i] = mas_sb[i].ToString();
 
-            m++;
+            //    var ordered = from item in mas2 orderby item select item;
+            //    int k = 0;
+            //    foreach (var item in ordered)
+            //    {
+            //        mas_sb[k] = new StringBuilder(item);
+            //        k++;
+            //    }
+            //}
+            //return mas_sb[numOrigStr].ToString();
+
+            //fast algorithm
+            int n = str.Length;
+            int m = 60000;
+
 
             int[] count = new int[m];
             for (int i = 0; i < m; i++) count[i] = 0;
-            for (int i = 0; i < n; i++) count[s[i]]++;
+            for (int i = 0; i < n; i++) count[str[i]]++;
             int sum = 0;
             for (int i = 0; i < m; i++)
             {
@@ -118,27 +136,24 @@ namespace AlgorithmRLE
                 count[i] = sum - count[i];
             }
 
-            int[] t = new int[m];
-            for (int i = 0; i < m; i++) t[i] = 0;
+            int[] t = new int[n];
+            for (int i = 0; i < n; i++) t[i] = 0;
             for (int i = 0; i < n; i++)
             {
-                t[count[s[i]]] = i;
-                count[s[i]]++;
+                t[count[str[i]]] = i;
+                count[str[i]]++;
             }
+            
 
-            int j = t[numOrigStr];
+            int pos = t[numOrigStr];
             StringBuilder answer = new("");
             for (int i = 0; i < n; i++)
             {
-                answer.Append(s[j]);
-                j = t[j];
+                answer.Append(str[pos]);
+                pos = t[pos];
             }
             return answer.ToString();
         }
-
-
-
-
 
     }
 }
