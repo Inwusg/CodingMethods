@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingMethods"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="FileButton" Content="File" HorizontalAlignment="Left" Margin="77,43,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button x:Name="Code" Content="Code" HorizontalAlignment="Left" Margin="592,73,0,0" VerticalAlignment="Top" Click="Code_Click"/>
-        <Button x:Name="Decode" Content="Decode" HorizontalAlignment="Left" Margin="706,63,0,0" VerticalAlignment="Top" Click="Decode_Click"/>
-        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="320,43,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
+        Title="Algorithms" Height="450" Width="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="640*"/>
+            <ColumnDefinition Width="159*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="FileButton" Content="Файл" HorizontalAlignment="Left" Margin="230,19,0,0" VerticalAlignment="Top" Click="Button_Click" Height="24" Width="120" Grid.Column="1" FontSize="14" FontWeight="Normal" FontStyle="Italic"/>
+        <Button x:Name="Code" Content="Code" HorizontalAlignment="Left" Margin="60,60,0,0" VerticalAlignment="Top" Click="Code_Click" Grid.Column="1" Height="20" Width="290" FontSize="14" FontStyle="Italic" Background="#FF17D715" FontFamily="Bahnschrift"/>
+        <Button x:Name="Decode" Content="Decode" HorizontalAlignment="Left" Margin="460,60,0,0" VerticalAlignment="Top" Click="Decode_Click" Grid.Column="1" Height="20" Width="290" Grid.ColumnSpan="2" FontSize="14" FontStyle="Italic" Background="#FF17D715" FontFamily="Bahnschrift"/>
+        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="630,21,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="1" Height="22" FontSize="14" FontStyle="Italic" Grid.ColumnSpan="2">
             <TextBlock>Lab1</TextBlock>
             <TextBlock>Lab2</TextBlock>
             <TextBlock>Lab3</TextBlock>
@@ -19,29 +24,49 @@
             <TextBlock>Lab6</TextBlock>
             <TextBlock>Lab7</TextBlock>
         </ComboBox>
-        <Label Content="Source" HorizontalAlignment="Left" Margin="50,91,0,0" VerticalAlignment="Top"/>
-        <Label Content="Result" HorizontalAlignment="Left" Margin="402,78,0,0" VerticalAlignment="Top"/>
-        <Label Content="Choose a method:" HorizontalAlignment="Left" Margin="189,45,0,0" VerticalAlignment="Top"/>
-        <RichTextBox x:Name="RichTextBox1" VerticalScrollBarVisibility="Visible" Margin="32,144,505,56">
+        <Label Content="Источник" HorizontalAlignment="Left" Margin="-19,245,0,0" VerticalAlignment="Top" Height="30" Width="88" RenderTransformOrigin="0.5,0.5" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" FontFamily="Bahnschrift">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-89.245"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="Результат" HorizontalAlignment="Left" Margin="393,236,0,0" VerticalAlignment="Top" Grid.Column="1" Height="32" Width="93" RenderTransformOrigin="0.5,0.5" FontSize="16" FontWeight="Bold" FontFamily="Bahnschrift">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-91.179"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="Выберите способ" HorizontalAlignment="Left" Margin="461,16,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Grid.Column="1" Height="30" Width="166" FontFamily="Bahnschrift"/>
+        <RichTextBox x:Name="RichTextBox1" VerticalScrollBarVisibility="Visible" Margin="45,132,290,56" Grid.Column="1">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <RichTextBox x:Name="RichTextBox2" VerticalScrollBarVisibility="Visible" Margin="400,144,72,56">
+        <RichTextBox x:Name="RichTextBox2" VerticalScrollBarVisibility="Visible" Margin="461,132,33,56" Grid.Column="1" Grid.ColumnSpan="2" Width="305">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Label Content="TimeCode:" HorizontalAlignment="Left" Margin="7,383,0,0" VerticalAlignment="Top"/>
-        <Label Content="TimeDecode:" HorizontalAlignment="Left" Margin="216,388,0,0" VerticalAlignment="Top"/>
-        <Label Content="Сompression ratio:" HorizontalAlignment="Left" Margin="468,387,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbCode" HorizontalAlignment="Left" Margin="78,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbDecode" HorizontalAlignment="Left" Margin="320,396,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbCompress" HorizontalAlignment="Left" Margin="592,395,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="TimeCode:" HorizontalAlignment="Left" Margin="61,82,0,0" VerticalAlignment="Top" Grid.Column="1" Height="31" Width="106" FontSize="16" FontWeight="Bold" FontFamily="Bahnschrift"/>
+        <Label Content="TimeDecode:" HorizontalAlignment="Left" Margin="461,82,0,0" VerticalAlignment="Top" Grid.Column="1" Height="31" Width="120" FontSize="16" FontWeight="Bold" FontFamily="Bahnschrift"/>
+        <Label Content="Степень сжатия:" HorizontalAlignment="Left" Margin="265,380,0,0" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="135" FontSize="16" FontWeight="Bold" FontFamily="Bahnschrift"/>
+        <TextBox x:Name="tbCode" HorizontalAlignment="Left" Margin="230,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="18" FontSize="14" FontStyle="Italic"/>
+        <TextBox x:Name="tbDecode" HorizontalAlignment="Left" Margin="630,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="18" FontSize="14" FontStyle="Italic" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="tbCompress" HorizontalAlignment="Left" Margin="424,386,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" Height="18" FontSize="14" FontStyle="Italic"/>
+        <Label Content="Загрузите файл" HorizontalAlignment="Left" Margin="60,15,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="29" Width="196" Grid.Column="1" FontFamily="Bahnschrift"/>
+        <Label Grid.Column="1" Content="или" HorizontalAlignment="Left" Margin="380,55,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="31" Width="40"/>
 
     </Grid>
 </Window>
