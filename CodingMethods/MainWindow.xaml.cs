@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AlgorithmLZ77;
 using AlgorithmRLE;
+using ArithmeticCoding;
 using HuffmanCoding;
 using Microsoft.Win32;
 using ShannonFano;
@@ -42,6 +43,7 @@ namespace CodingMethods
 
         private BinaryTree _lab1;
         private ShannonFanoAlg _lab2;
+        private Arithmetic _lab3;
         private RLE _lab4;
         private LZ77 _lab5;
         private string _text, _text_preob;
@@ -128,7 +130,15 @@ namespace CodingMethods
             tbCompress.Text = ((double) (_text.Length * 8) / (kol * size)).ToString("F4");
         }
 
-        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Char[]; size: 56MB")]
+
+        private void CompressionRatio4()
+        {
+            //throw new NotImplementedException();
+        }
+
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH",
+            MessageId = "type: System.Char[]; size: 56MB")]
+        private Fraction fr = new Fraction();
         private void Code_Click(object sender, RoutedEventArgs e)
         {
             Code.IsEnabled = false;
@@ -150,6 +160,10 @@ namespace CodingMethods
                     CompressionRatio();
                     break;
                 case 2:
+                    _lab3 = new();
+                    fr = _lab3.Encode(_text);
+                    _text_preob = fr.ToString();
+                    CompressionRatio4();
                     break;
                 case 3:
                     _lab4 = new();
@@ -191,6 +205,8 @@ namespace CodingMethods
 
         }
 
+        
+
         [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.String; size: 437MB")]
         [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Char[]; size: 168MB")]
         private void Decode_Click(object sender, RoutedEventArgs e)
@@ -210,6 +226,7 @@ namespace CodingMethods
                     text = _lab2.Decode(_text_preob);
                     break;
                 case 2:
+                    text = _lab3.Decode(fr);
                     break;
                 case 3:
                     text = _lab4.Decode(_text_preob);
